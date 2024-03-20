@@ -19,6 +19,10 @@ const params = {
 export const CreateNoteInputSchema = z.object({
   ...payload,
 });
+export const GetNoteInputSchema = z.object({
+  ...params,
+});
 
 export type Note = z.infer<typeof NoteSchema>;
 export type CreateNoteInput = z.infer<typeof CreateNoteInputSchema>;
+export type GetNoteInput = z.infer<typeof GetNoteInputSchema>;

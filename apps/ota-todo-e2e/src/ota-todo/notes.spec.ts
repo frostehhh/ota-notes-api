@@ -18,4 +18,11 @@ describe('Note Endpoints /notes', () => {
     expect(NoteSchema.parse(res.data)).toBeTruthy();
   });
 
+  it('should retrieve a note by id', async () => {
+    const noteId = '7774c403-abae-4626-b665-648dfb277e53';
+    const res = await axios.get(`${notesPath}/${noteId}`);
+    expect(res.status).toEqual(200);
+    expect(NoteSchema.parse(res.data)).toBeTruthy();
+    expect(res.data.id).toEqual(noteId);
+  });
 });
