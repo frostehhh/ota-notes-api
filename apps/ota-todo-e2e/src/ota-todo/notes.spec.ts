@@ -38,4 +38,11 @@ describe('Note Endpoints /notes', () => {
     expect(NoteSchema.parse(res.data)).toBeTruthy();
     expect(res.data).toEqual({ id: noteId, ...noteUpdate });
   });
+
+  it('should delete a note', async () => {
+    const noteId = '7774c403-abae-4626-b665-648dfb277e53';
+    const res = await axios.delete(`${notesPath}/${noteId}`);
+
+    expect(res.status).toEqual(204);
+  });
 });

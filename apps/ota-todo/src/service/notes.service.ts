@@ -48,3 +48,12 @@ export async function updateNote(note: Note, noteUpdate: UpdateNoteInput['body']
 
   return notes.notes[noteIdx];
 }
+
+export async function deleteNote(note: Note) {
+  const notes = getNotesFromJson();
+  const noteIdx = notes.notes.findIndex(({ id }) => id === note.id);
+
+  notes.notes.splice(noteIdx, 1);
+
+  fs.writeFileSync(dummyDataPath, JSON.stringify(notes));
+}

@@ -26,8 +26,12 @@ export const UpdateNoteInputSchema = z.object({
   ...payload,
   ...params,
 });
+export const DeleteNoteInputSchema = z.object({
+  ...params,
+});
 
 export type Note = z.infer<typeof NoteSchema>;
 export type CreateNoteInput = z.infer<typeof CreateNoteInputSchema>;
 export type GetNoteInput = z.infer<typeof GetNoteInputSchema>;
 export type UpdateNoteInput = z.infer<typeof UpdateNoteInputSchema>;
+export type DeleteNoteInput = z.infer<typeof DeleteNoteInputSchema>;

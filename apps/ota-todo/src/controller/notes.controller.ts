@@ -1,8 +1,8 @@
-import type { CreateNoteInput, GetNoteInput, UpdateNoteInput } from '@ota/core';
+import type { CreateNoteInput, DeleteNoteInput, GetNoteInput, UpdateNoteInput } from '@ota/core';
 import { ApiError } from '@ota/core';
 import type { Request, Response } from 'express';
 
-import { createNote, findNote, getNotes, updateNote } from '../service';
+import { createNote, deleteNote, findNote, getNotes, updateNote } from '../service';
 
 export async function getNotesHandler(req, res, next) {
   try {
@@ -68,4 +68,22 @@ export async function updateNoteHandler(
   } catch (e) {
     next(e);
   }
+}
+
+export async function deleteNoteHandler(
+  req: Request<DeleteNoteInput['params']>,
+  res: Response,
+  next,
+) {
+  const noteId = req.params.id;
+
+  const note = await findNote(noteId);
+
+  if (!note) {
+    throw new ApiError({ statusCode: 404, message: 'Note does not exist' });
+  }
+
+  await deleteNote(note);
+
+  return res.sendStatus(204);
 }
