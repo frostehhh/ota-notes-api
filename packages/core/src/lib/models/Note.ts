@@ -22,7 +22,12 @@ export const CreateNoteInputSchema = z.object({
 export const GetNoteInputSchema = z.object({
   ...params,
 });
+export const UpdateNoteInputSchema = z.object({
+  ...payload,
+  ...params,
+});
 
 export type Note = z.infer<typeof NoteSchema>;
 export type CreateNoteInput = z.infer<typeof CreateNoteInputSchema>;
 export type GetNoteInput = z.infer<typeof GetNoteInputSchema>;
+export type UpdateNoteInput = z.infer<typeof UpdateNoteInputSchema>;

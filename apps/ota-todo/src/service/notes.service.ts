@@ -1,4 +1,4 @@
-import type { CreateNoteInput, Note } from '@ota/core';
+import type { CreateNoteInput, Note, UpdateNoteInput } from '@ota/core';
 import { randomUUID } from 'crypto';
 import * as fs from 'fs';
 
@@ -33,4 +33,18 @@ export async function createNote(createNoteInput: CreateNoteInput) {
 export async function findNote(noteId: Note['id']) {
   const notes = getNotesFromJson();
   return notes.notes.find(({ id }) => id === noteId);
+}
+
+export async function updateNote(note: Note, noteUpdate: UpdateNoteInput['body']) {
+  const notes = getNotesFromJson();
+  const noteIdx = notes.notes.findIndex(({ id }) => id === note.id);
+
+  notes.notes[noteIdx] = {
+    id: note.id,
+    ...noteUpdate,
+  };
+
+  fs.writeFileSync(dummyDataPath, JSON.stringify(notes));
+
+  return notes.notes[noteIdx];
 }
