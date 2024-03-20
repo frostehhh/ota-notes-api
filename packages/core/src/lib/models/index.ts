@@ -1,2 +1,1 @@
-export type { Note } from './Note';
-export { NoteSchema } from './Note';
+export * from './Note';
